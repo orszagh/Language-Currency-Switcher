@@ -1,0 +1,22 @@
+# Compiled CSS
+*.css.map
+*.min.css
+
+# Build files
+build/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
