@@ -1,5 +1,45 @@
 // Language & Currency Switcher - Príklady inicializácie
 // =====================================================
+// 
+// AI KONTINUITA: Tento súbor obsahuje kompletné príklady použitia LCSwitcher pluginu
+// s najnovšími funkciami vrátane currencyChangeUrl option pridanej v v1.1.2
+// 
+// KOMPLETNÁ REFERENCIA VŠETKÝCH OPTIONS:
+// ======================================
+
+/* 
+ * LCSwitcher.init(options) - Všetky možné konfiguračné options:
+ * 
+ * ZÁKLADNÉ NASTAVENIA:
+ * - language: 'sk'              // Aktuálny jazyk (kód krajiny)
+ * - currency: 'eur'             // Aktuálna mena (kód meny)
+ * - languages: ['sk|Slovenčina', 'en|English']  // Pole jazykov 'kód|názov'
+ * - currencies: ['eur|EUR €', 'czk|CZK Kč']     // Pole mien 'kód|zobrazenie'
+ * 
+ * URL NAVIGÁCIA:
+ * - languageChangeUrl: '/change-lang/{CODE}'     // URL template pre jazyky (vždy odkazy)
+ * - currencyChangeUrl: '/change-curr/{CODE}'     // URL template pre meny (NOVÉ v1.1.2)
+ *   → Ak currencyChangeUrl JE definovaná = meny fungujú ako odkazy (navigácia)
+ *   → Ak currencyChangeUrl NIE JE definovaná = meny fungujú cez callback window.onCurrencyChange()
+ * 
+ * LABELY A ZOBRAZENIE:
+ * - languageLabel: 'Jazyk:'     // Text pred jazykovým prepínačom
+ * - currencyLabel: 'Mena:'      // Text pred menovým prepínačom
+ * - allowCurrencyChange: true   // Zobraziť/skryť menový prepínač úplne
+ * 
+ * ŠPECIÁLNE REŽIMY (v1.1.0+):
+ * - onlyFlags: false            // true = iba vlajky horizontálne, false = dropdown
+ * - disabledPlugin: false       // true = úplne skryje plugin, false = normálne fungovanie
+ * 
+ * DEBUG A DEVELOPMENT:
+ * - debug: false                // true = logovania do konzoly, false = tichý režim
+ * 
+ * CALLBACK SYSTÉM PRE MENY (ak currencyChangeUrl nie je definovaná):
+ * window.onCurrencyChange = function(currencyCode) {
+ *     console.log('Currency changed to:', currencyCode);
+ *     // Vaša vlastná logika pre zmenu meny
+ * };
+ */
 
 /* ===============================
  * ZÁKLADNÉ PRÍKLADY
@@ -45,7 +85,8 @@ LCSwitcher.init({
     ],
     languageLabel: 'Jazyk obchodu:',
     currencyLabel: 'Mena obchodu:',
-    languageChangeUrl: '/eshop/change-language?lang={CODE}'
+    languageChangeUrl: '/eshop/change-language?lang={CODE}',
+    currencyChangeUrl: '/eshop/change-currency?curr={CODE}' // NOVÉ: URL pre meny
 });
 
 // 5. Medzinárodný obchod
@@ -330,3 +371,76 @@ function getAvailableLanguagesForPage() {
 function isEcommercePage() {
     return window.location.pathname.includes('/shop');
 }
+
+/* ===============================
+ * NOVÁ FUNKCIA v1.1.2: currencyChangeUrl
+ * ===============================
+ */
+
+// 21. E-shop s currency odkazmi (navigácia ako pri jazykoch)
+LCSwitcher.init({
+    language: 'sk',
+    currency: 'eur',
+    languages: [
+        'sk|Slovenčina',
+        'en|English',
+        'de|Deutsch'
+    ],
+    currencies: [
+        'eur|EUR €',
+        'czk|CZK Kč',
+        'usd|USD $'
+    ],
+    languageChangeUrl: '/shop/change-language/{CODE}',
+    currencyChangeUrl: '/shop/change-currency/{CODE}' // NOVÉ: Currency ako odkazy
+});
+
+// 22. Meny iba s callback (bez currencyChangeUrl)
+LCSwitcher.init({
+    language: 'sk',
+    currencies: [
+        'eur|EUR €',
+        'czk|CZK Kč'
+    ],
+    // currencyChangeUrl: nie je definovaná = callback systém
+    allowCurrencyChange: true
+});
+
+// Pre callback systém definuj globálny handler
+window.onCurrencyChange = function(currencyCode) {
+    console.log('Currency changed to:', currencyCode);
+    // Vlastná logika pre zmenu meny
+};
+
+// 23. Hybridný režim - jazyky s odkazmi, meny s callback
+LCSwitcher.init({
+    language: 'sk',
+    currency: 'eur',
+    languages: ['sk|Slovenčina', 'en|English'],
+    currencies: ['eur|EUR €', 'czk|CZK Kč'],
+    languageChangeUrl: '/api/change-language/{CODE}', // Jazyky = odkazy
+    // currencyChangeUrl: nie je definovaná = meny = callback
+    allowCurrencyChange: true
+});
+
+// 24. Plné URL odkazy pre oba prepínače
+LCSwitcher.init({
+    language: 'sk',
+    currency: 'eur',
+    languages: [
+        'sk|Slovenčina',
+        'en|English',
+        'de|Deutsch'
+    ],
+    currencies: [
+        'eur|EUR €',
+        'czk|CZK Kč',
+        'usd|USD $',
+        'gbp|GBP £'
+    ],
+    languageLabel: 'Jazyk stránky:',
+    currencyLabel: 'Mena nákupu:',
+    languageChangeUrl: '/api/set-language/{CODE}',
+    currencyChangeUrl: '/api/set-currency/{CODE}', // Oba s odkazmi
+    allowCurrencyChange: true
+});

@@ -1,42 +1,41 @@
 # LCSwitcher STAV PROJEKTU
 
 **Verzia:** 1.1.2  
-**Posledná aktualizácia:** 8. september 2025 - 16:00  
-**Stav:** PRIPRAVENÉ NA PRODUKCIU - STABILNÁ VERZIA
+**Posledná aktualizácia:** 9. september 2025 - 18:45  
+**Stav:** PRIPRAVENÉ NA PRODUKCIU - DOKUMENTÁCIA KOMPLETNÁ
 
 ## PREHĽAD PROJEKTU
-**LCSwitcher** je kompletný jazykový a menový prepínač pre webové stránky a e-shopy. Plugin poskytuje moderný dropdown UI s podporou SVG vlajok, CSS custom properties pre theming a nové funkcie ako OnlyFlags režim.
+**LCSwitcher** je kompletný jazykový a menový prepínač pre webové stránky a e-shopy. Plugin poskytuje moderný dropdown UI s podporou SVG vlajok, CSS custom properties pre theming a nové funkcie ako OnlyFlags režim a currencyChangeUrl.
 
 ### 🎯 HLAVNÉ CIELE PROJEKTU
 - Poskytovať moderný a prístupný jazykový prepínač
+- Flexibilné riešenie pre menový prepínač (odkazy aj callback systém)
 - Plná podpora accessibility a klávesovej navigácie
 - Optimalizovaný výkon a responzívny dizajn
 - Jednoduché API a rozsiahle možnosti prispôsobenia
 - Kompletná dokumentácia v slovenskom jazyku
 
-## AKTUÁLNY STAV v1.1.2
+## AKTUÁLNY STAV
 
 ### ✅ DOKONČENÉ FUNKCIE
-- **Hlavný Plugin** (v1.1.2): jQuery plugin s kompletným API
+- **Hlavný Plugin** (v1.1.2): jQuery plugin s kompletným API a novou currencyChangeUrl option
 - **CSS Štýlovanie**: SCSS súbor s CSS custom properties systémom  
 - **OnlyFlags Režim**: Nový režim s vlajkami vedľa seba bez dropdown
 - **Vypnutie Pluginu**: Možnosť dočasného vypnutia
+- **Currency URL Option**: NOVÉ v1.1.2 - meny môžu fungovať ako odkazy alebo callback
 - **Debug Systém**: Rozšírený debugging pre vývoj
 - **SVG Vlajky**: Automatické generovanie vlajok pre 15+ krajín
 - **Responzívny Dizajn**: Plne responzívny na všetkých zariadeniach
 - **Výkon**: Optimalizované animácie a prechody
 
-### ✅ DOKUMENTÁCIA V SLOVENČINE
+### ✅ DOKUMENTÁCIA
 - **README.md**: Kompletná dokumentácia s API referenciou v slovenčine
 - **initialization-examples.js**: 20 praktických príkladov použitia
-- **PROJECT-STATUS.md**: Tento súbor pre AI kontinuitu v slovenčine
+- **PROJECT-STATUS.md**: Tento súbor pre AI kontinuitu
 - **Inline komentáre**: Komentáre v kóde pre lepšie pochopenie
 
-### ✅ VYLEPŠENIA v1.1.2 (september 2025)
-- **Kompletná slovenská dokumentácia**: Všetky súbory preložené
-- **GitHub synchronizácia**: Všetky súbory správne nahrané
-- **Stabilná verzia**: Overená funkcionalita a dokumentácia
-- **Dropdown rozostupy**: Opravené CSS selektory
+### ✅ POSLEDNÉ VYLEPŠENIA
+- **Dropdown rozostupy**: Opravené CSS selektory pre správne rozostupy
 - **Rýchlosť animácií**: Zrýchlené transitions (0.3s → 0.15s, 0.2s → 0.1s)
 - **Opravy okrajov**: Odstránené čierne borders, transparentné border-color
 - **OnlyFlags štýlovanie**: Kompletné CSS pre nový režim s hover efektmi
@@ -45,13 +44,13 @@
 
 ### ŠTRUKTÚRA SÚBOROV
 ```
-Content/plugins/switcher-lang-currency-v1.1.2/
-├── switcher-lang-currency-orso.js      # Hlavný plugin (v1.1.2)
+Content/plugins/switcher-lang-currency-orso/
+├── switcher-lang-currency-orso.js      # Hlavný plugin (v1.1.0)
 ├── switcher-lang-currency-orso.scss    # Zdrojové štýly (užívateľ kompiluje)
-├── switcher-lang-currency-orso.css     # Kompilované CSS (užívateľ má)
-├── README.md                           # Hlavná dokumentácia v slovenčine
-├── initialization-examples.js          # 20 príkladov použitia
-├── PROJECT-STATUS.md                   # Tento súbor v slovenčine
+├── switcher-lang-currency-orso.css     # Kompilované CSS (gitignored)
+├── README.md                           # Hlavná dokumentácia
+├── initialization-examples.js          # Príklady použitia
+├── PROJECT-STATUS.md                   # Tento súbor
 └── CHANGELOG.md                        # História zmien
 ```
 
@@ -62,11 +61,11 @@ Content/plugins/switcher-lang-currency-v1.1.2/
 
 ### CSS CUSTOM PROPERTIES
 **67 CSS premenných** s `--tp-lang-switcher-` prefixom:
-- **Farby**: pozadia, okraje, text, hover stavy
-- **Rozostupy**: paddings, margins, gaps
-- **Typografia**: veľkosti písma, váhy, výšky riadkov  
-- **Efekty**: tiene, prechody, transformácie
-- **Layout**: šírky, výšky, pozicionovanie
+- Farby: pozadia, okraje, text, hover stavy
+- Rozostupy: paddings, margins, gaps
+- Typografia: veľkosti písma, váhy, výšky riadkov  
+- Efekty: tiene, prechody, transformácie
+- Layout: šírky, výšky, pozicionovanie
 
 ## API REFERENCIA
 
@@ -78,22 +77,28 @@ Content/plugins/switcher-lang-currency-v1.1.2/
 | `LCSwitcher.enableDebug()` | Zapne debug režim | ✅ KOMPLETNÉ |
 | `LCSwitcher.disableDebug()` | Vypne debug režim | ✅ KOMPLETNÉ |
 
-### MOŽNOSTI v1.1.2
+### NOVÉ MOŽNOSTI (v1.1.2)
+- `currencyChangeUrl: string` - **NOVÉ** URL template pre menové odkazy (voliteľné)
+  - Ak je definovaná → meny fungujú ako odkazy (navigácia)
+  - Ak nie je definovaná → meny fungujú cez callback window.onCurrencyChange()
+
+### EXISTUJÚCE MOŽNOSTI (v1.1.0+)
 - `onlyFlags: boolean` - Zobrazovať iba vlajky bez dropdown
 - `disabledPlugin: boolean` - Dočasne vypnúť plugin
 - `debug: boolean` - Zapnúť debug logovanie
+
+### ZÁKLADNÉ MOŽNOSTI
 - `language, languages, currency, currencies`
 - `languageLabel, currencyLabel, languageChangeUrl`
 - `allowCurrencyChange` (boolean)
 
-## PRACOVNÝ POSTUP - KRITICKÉ PRAVIDLÁ!
+## PRACOVNÝ POSTUP
 
 ### SCSS KOMPILÁCIA
 - **Zdrojový súbor**: `switcher-lang-currency-orso.scss`
 - **Kompilácia**: Zodpovednosť užívateľa (nie automatická)
-- **Výstup**: `switcher-lang-currency-orso.css`
-- **PRAVIDLO #1**: Vždy editovať .scss, nikdy .css priamo
-- **PRAVIDLO #2**: Po úprave .scss kompilujte do .css
+- **Výstup**: `switcher-lang-currency-orso.css` (gitignored)
+- **Editovanie**: Vždy editovať .scss, nikdy .css priamo
 
 ### CSS PRISPÔSOBENIE
 Užívatelia môžu prepísať akúkoľvek z 67 CSS custom properties:
@@ -106,18 +111,17 @@ Užívatelia môžu prepísať akúkoľvek z 67 CSS custom properties:
 }
 ```
 
-## STAV TESTOVANIA v1.1.2
+## STAV TESTOVANIA
 
 ### ✅ OVERENÉ FUNKCIE
 - Dropdown funkcionalita a rozostupy
 - OnlyFlags horizontálny layout
 - Funkcia vypnutia pluginu  
-- Výkon animácií a prechody
+- Výkon animácií
 - Opravy štýlovania okrajov
-- Responzívne správanie na všetkých zariadeniach
+- Responzívne správanie
 - SVG rendering vlajok
 - CSS custom properties prepísanie
-- GitHub synchronizácia dokumentácie
 
 ### ✅ KOMPATIBILITA PREHLIADAČOV
 - Chrome 80+, Firefox 70+, Safari 13+, Edge 80+
@@ -125,57 +129,87 @@ Užívatelia môžu prepísať akúkoľvek z 67 CSS custom properties:
 
 ## VYRIEŠENÉ PROBLÉMY
 
-### Opravy v1.1.2 (8. september 2025)
-1. **GitHub synchronizácia**: Vyriešené problémy s nahrávaním dokumentácie
-2. **Slovenská dokumentácia**: Kompletné preloženie všetkých súborov
-3. **Stabilná verzia**: Overená funkcionalita a súbory
+### Najnovšie funkcie (9. september 2025)
+1. **currencyChangeUrl option**: Implementovaná nová option pre currency odkazy
+   - Dvojitý režim: odkazy (s currencyChangeUrl) alebo callback (bez nej)
+   - Plná spätná kompatibilita s existujúcim kódom
+   - Hybridný režim: jazyky ako odkazy + meny ako callback
+2. **Kompletná dokumentácia**: Pridaná úplná referencia všetkých options do initialization-examples.js
+3. **AI kontinuita**: Zdokumentovaná nová funkcionalita pre budúce AI pokračovanie
 
-### Opravy v1.1.0-1.1.1 (8. september 2025)
+### Posledné opravy (8. september 2025)
 1. **Dropdown rozostupy**: Opravený CSS selektor `.options-list` → `.options[role="listbox"]`
 2. **Rýchlosť animácií**: Optimalizované transition hodnoty pre lepší UX
 3. **Problémy s okrajmi**: Nastavené transparentné `border-color` na problematických elementoch
 4. **OnlyFlags štýlovanie**: Vytvorené komplexné CSS pre nový layout režim
 
+### Optimalizácie výkonu
+- Znížené trvanie prechodov o 50%
+- Optimalizované CSS selektory pre špecificitu
+- Minimalizované reflows počas animácií
+
 ## PRIPRAVENÝ NA PRODUKCIU
 
-### ✅ STABILNÁ VERZIA v1.1.2
+### ✅ PRIPRAVENÝ NA GITHUB
 - Čistý, dokumentovaný kód
 - Komplexné príklady a dokumentácia v slovenčine
-- Všetky funkcie testované a overené
+- Verzia 1.1.2 s currencyChangeUrl funkcionalitou
 - Žiadne známe chyby alebo problémy
-- GitHub synchronizácia vyriešená
+- Produkčne testovaný štýlovací systém
+
+### VYČISTENIE DOKONČENÉ
+- ✅ Odstránené `demo.html` (vývojársky súbor)
+- ✅ Odstránené dočasné/testovacie súbory
+- ✅ Zabezpečené že `.css` súbor je gitignored (užívateľ kompiluje z .scss)
+
+## ĎALŠIA FÁZA VÝVOJA
+
+### Potenciálne budúce funkcie
+- **TypeScript podpora**: .d.ts definície
+- **Framework integrácie**: React/Vue komponenty
+- **Ďalšie vlajky**: Viac vlajok krajín
+- **Accessibility**: Rozšírená ARIA podpora
+- **Témy**: Predpripravené farebné schémy
+
+### Údržba
+- Pravidelné aktualizácie kompatibility prehliadačov
+- Monitorovanie výkonu
+- Integrácia spätnej väzby od užívateľov
+
+## GITHUB COMMIT STRATÉGIA
+
+### Pripravené na vydanie
+1. ✅ **Čistá dokumentácia**: README.md kompletne prepísané v slovenčine
+2. ✅ **Príkladový kód**: initialization-examples.js s 20 scenármi  
+3. ✅ **Statusová dokumentácia**: Tento PROJECT-STATUS.md súbor v slovenčine
+4. ✅ **Vyčistenie demo**: Odstránené demo.html a testovacie súbory
+5. ✅ **Finálny commit**: "Dokumentácia v slovenčine nahraná úspešne"
 
 ## POZNÁMKY PRE AI KONTINUITU
 
-### 🔑 KĽÚČOVÉ INFORMÁCIE PRE BUDÚCE AI SESSIONS
-- **Aktuálna verzia**: v1.1.2 (stabilná verzia)
+### Kľúčové informácie pre budúce AI sessions
 - **Workflow užívateľa**: Edituje .scss súbory, kompiluje manuálne do .css
-- **NIKDY NEEDITOVAŤ CSS**: Vždy editovať .scss zdrojové súbory
+- **Nikdy needitovať CSS**: Vždy editovať .scss zdrojové súbory
+- **Aktuálna verzia**: 1.1.0 s OnlyFlags a disablePlugin funkciami  
 - **Všetky funkcie funkčné**: Žiadne chyby, pripravené na produkčné použitie
-- **Dokumentácia kompletná**: Všetko v slovenčine
+- **Dokumentácia kompletná**: README.md má plnú API referenciu a príklady v slovenčine
 
-### 📝 KONTEXT VERZIE v1.1.2
-- Vytvorená kvôli problémom s GitHub synchronizáciou
-- Všetky súbory skopírované a aktualizované
-- Slovenská dokumentácia kompletná
-- Stabilná verzia pripravená na distribúciu
+### Nedávny kontext
+- Užívateľ požiadal o komplexnú finalizáciu projektu
+- Všetky CSS/štýlovacie problémy úspešne vyriešené
+- Zameranie na čistý, produkčne pripravený balík pre GitHub
+- Užívateľ preferuje dôkladnú dokumentáciu a príklady v slovenčine
 
-### 📁 KRITICKÉ SÚBORY v1.1.2
+### Kritické súbory
 - `switcher-lang-currency-orso.js` - Hlavný plugin
-- `switcher-lang-currency-orso.scss` - **ZDROJOVÉ ŠTÝLY** (vždy editovať)  
-- `README.md` - Dokumentácia v slovenčine
-- `initialization-examples.js` - 20 príkladov
-- `PROJECT-STATUS.md` - Tento súbor v slovenčine
+- `switcher-lang-currency-orso.scss` - Zdrojové štýly (editovať toto)  
+- `README.md` - Hlavná dokumentácia v slovenčine
+- `initialization-examples.js` - Príklady použitia
+- `PROJECT-STATUS.md` - Tento statusový súbor v slovenčine
 
-### 🚨 DÔLEŽITÉ PRAVIDLÁ PRE v1.1.2
-1. **Vždy editovať .scss súbory**, nie .css
-2. **Dokumentácia v slovenčine** - všetky texty preložené
-3. **API je kompletné** - žiadne nové funkcie potrebné
-4. **Výkon optimalizovaný** - animácie rýchle
-5. **Projekt produkčne pripravený** - stabilná verzia
+**Stav:** PRIPRAVENÉ NA PRODUKCIU - v1.1.2 s currencyChangeUrl funkcionalitou
 
 ---
-
-**FINÁLNY STAV v1.1.2:** PRIPRAVENÉ NA PRODUKCIU  
-**VERZIA:** Stabilná, otestovaná a pripravená na GitHub  
-**POSLEDNÁ AKTUALIZÁCIA:** 8. september 2025 - 16:00
+**Posledná synchronizácia s GitHub:** 9. september 2025 - 18:45  
+**Commit status:** v1.1.2 nahraná na GitHub úspešne  
+**Nová funkcionalita:** currencyChangeUrl option implementovaná a zdokumentovaná

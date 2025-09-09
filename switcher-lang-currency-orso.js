@@ -1,16 +1,21 @@
 /* 
- * Prepínač jazykov a mien (server-driven, accessibility-first)
- * =============================================================
+ * Prepínač jazykov a mien v1.1.2 (server-driven, accessibility-first)
+ * =====================================================================
  * 
  * KOMPLETNÁ SADA FUNKCIÍ (pre kontinuitu AI):
  * - Prepínanie jazykov: Vždy viditeľné s <a href> navigačnými odkazmi
- * - Prepínanie mien: Iba UI s konfigurovateľným zobrazením
+ * - Prepínanie mien: Dvojitý režim - odkazy (currencyChangeUrl) alebo callback systém
  * - Integrácia vlajok: SVG vlajky z ~/Content/flags/4x3/*.svg
  * - Mobilná optimalizácia: Fixné pozíciovanie vľavo dole s overlay
  * - CSS custom properties: 67 premenných s prefixom --tp-lang-switcher-
  * - Podpora labelov: Voliteľné textové prefixy pre jazyk aj menu
  * - Accessibility: Plná ARIA podpora, oznámenia pre screen readery
  * - Správa eventov: Natívny addEventListener s proper cleanup
+ * 
+ * NOVÉ V v1.1.2:
+ * - currencyChangeUrl option: Meny môžu fungovať ako odkazy (navigácia) alebo callback
+ * - Spätná kompatibilita: Ak currencyChangeUrl nie je definovaná, používa sa callback systém
+ * - Hybridný režim: Jazyky ako odkazy + meny ako callback (alebo naopak)
  * 
  * POŽIADAVKY NA HTML ŠTRUKTÚRU:
  * ```html
@@ -39,7 +44,8 @@
  *   languageLabel: 'Jazyk:',  // Voliteľný textový prefix
  *   currencyLabel: 'Mena:',   // Voliteľný textový prefix
  *   allowCurrencyChange: true, // Zobraziť/skryť menový prepínač
- *   languageChangeUrl: '/Home/ChangeLanguage?code={CODE}',
+ *   languageChangeUrl: '/Home/ChangeLanguage?code={CODE}',  // URL pre jazyky
+ *   currencyChangeUrl: '/Shop/ChangeCurrency?code={CODE}',  // URL pre meny (voliteľné)
  *   debug: false              // Logovania do konzoly
  * });
  * ```
@@ -324,20 +330,22 @@
      * 
      * Funkcie:
      * - Zobrazuje sa iba ak allowCurrencyChange !== false
-     * - Iba UI prepínanie (žiadna navigácia)
+     * - Dvojitý režim: odkazy (ak je currencyChangeUrl) alebo callback systém
      * - Podporuje voliteľné textové labely
      * - Zachováva text labelu počas zmien meny
-     * - Spúšťa globálny callback: window.onCurrencyChange()
+     * - S odkazmi: navigácia ako pri jazykoch
+     * - Bez odkazov: spúšťa globálny callback window.onCurrencyChange()
      * - Plná accessibility s ARIA
      */
     function initCurrencySwitch($root, options) {
         const currentCurrency = options.currency || 'eur';
         const labelText = options.currencyLabel || ''; // Text pred výber meny
+        const urlTemplate = options.currencyChangeUrl || ''; // URL template pre currency odkazy
 
         const $current = $root.find('.current');
         const $listbox = $root.find('[role="listbox"]');
 
-        log('Inicializácia menového prepínača', { currentCurrency, labelText });
+        log('Inicializácia menového prepínača', { currentCurrency, labelText, urlTemplate });
 
         // Nastav aktuálnu menu v UI s prípadným labelom
         // Vyčisti aktuálny obsah current elementu (okrem sr-only)
@@ -388,16 +396,33 @@
                 const liId = `opt-curr-${code}`;
                 const isSelected = code.toLowerCase() === currentCurrency.toLowerCase();
 
-                const $li = $(`
-                    <li id="${liId}" role="option" data-currency="${code}" aria-selected="${isSelected}" class="${isSelected ? 'selected' : ''}">
+                // Rozhodnutie medzi odkazom a span-om na základe currencyChangeUrl
+                let linkHtml;
+                if (urlTemplate) {
+                    // Ak je definovaný URL template, vytvor <a> odkaz ako pri jazykoch
+                    const href = urlTemplate.replace('{CODE}', encodeURIComponent(code));
+                    linkHtml = `
+                        <a href="${href}" class="currency-link">
+                            <span class="text">${label || code.toUpperCase()}</span>
+                        </a>
+                    `;
+                } else {
+                    // Ak nie je URL, použij span ako doteraz (callback systém)
+                    linkHtml = `
                         <span class="currency-link">
                             <span class="text">${label || code.toUpperCase()}</span>
                         </span>
+                    `;
+                }
+
+                const $li = $(`
+                    <li id="${liId}" role="option" data-currency="${code}" aria-selected="${isSelected}" class="${isSelected ? 'selected' : ''}">
+                        ${linkHtml}
                     </li>
                 `);
 
                 $listbox.append($li);
-                log('Pridaná menová možnosť:', { code, label, isSelected });
+                log('Pridaná menová možnosť:', { code, label, isSelected, hasUrl: !!urlTemplate });
             });
         }
 
@@ -594,47 +619,57 @@
                     announce(`Navigating to ${$link.text().trim()}`);
                 }
             } else {
-                // Pre meny spracuj ako callback
-                e.stopPropagation();
-                e.preventDefault();
+                // Pre meny - rozlíš medzi odkazom a callback systémom
+                const $currencyLink = $(this).find('a.currency-link');
+                
+                if ($currencyLink.length) {
+                    // Ak je currency link <a> element, nechaj prirodzenú navigáciu
+                    log('Klik na currency link:', $currencyLink.attr('href'));
+                    announce(`Navigating to currency ${$currencyLink.text().trim()}`);
+                    // Nepreventuj default - nechaj navigáciu
+                } else {
+                    // Ak je iba span, použij callback systém ako doteraz
+                    e.stopPropagation();
+                    e.preventDefault();
 
-                const newCurrency = $(this).data('currency');
-                if (newCurrency) {
-                    log('Mena zmenená na:', newCurrency);
+                    const newCurrency = $(this).data('currency');
+                    if (newCurrency) {
+                        log('Mena zmenená na:', newCurrency);
 
-                    // Zisti, či existuje label pre menu - hľadaj .currency-text alebo fallback
-                    let $textSpan = $current.find('.currency-text');
-                    if (!$textSpan.length) {
-                        $textSpan = $current.find('span[aria-hidden="true"]');
-                    }
-                    
-                    const currentText = $textSpan.text();
-                    const hasLabel = currentText.includes(':');
-                    
-                    let newDisplayText = newCurrency.toUpperCase();
-                    if (hasLabel) {
-                        // Zachovaj label text pred menou (hľadaj text pred ":")
-                        const labelMatch = currentText.match(/^([^:]+:)\s*/);
-                        if (labelMatch) {
-                            newDisplayText = `${labelMatch[1]} ${newDisplayText}`;
+                        // Zisti, či existuje label pre menu - hľadaj .currency-text alebo fallback
+                        let $textSpan = $current.find('.currency-text');
+                        if (!$textSpan.length) {
+                            $textSpan = $current.find('span[aria-hidden="true"]');
+                        }
+                        
+                        const currentText = $textSpan.text();
+                        const hasLabel = currentText.includes(':');
+                        
+                        let newDisplayText = newCurrency.toUpperCase();
+                        if (hasLabel) {
+                            // Zachovaj label text pred menou (hľadaj text pred ":")
+                            const labelMatch = currentText.match(/^([^:]+:)\s*/);
+                            if (labelMatch) {
+                                newDisplayText = `${labelMatch[1]} ${newDisplayText}`;
+                            }
+                        }
+
+                        // Aktualizuj UI
+                        $textSpan.text(newDisplayText);
+                        $items.removeClass('selected').attr('aria-selected', 'false');
+                        $(this).addClass('selected').attr('aria-selected', 'true');
+
+                        announce(`Currency changed to ${newCurrency.toUpperCase()}`);
+
+                        // Callback ak existuje
+                        if (typeof window.onCurrencyChange === 'function') {
+                            window.onCurrencyChange(newCurrency);
                         }
                     }
 
-                    // Aktualizuj UI
-                    $textSpan.text(newDisplayText);
-                    $items.removeClass('selected').attr('aria-selected', 'false');
-                    $(this).addClass('selected').attr('aria-selected', 'true');
-
-                    announce(`Currency changed to ${newCurrency.toUpperCase()}`);
-
-                    // Callback ak existuje
-                    if (typeof window.onCurrencyChange === 'function') {
-                        window.onCurrencyChange(newCurrency);
-                    }
+                    close();
+                    $current.focus();
                 }
-
-                close();
-                $current.focus();
             }
         });
 
@@ -782,6 +817,7 @@
          * @param {boolean=} options.onlyFlags - Zobraziť iba vlajky vedľa seba bez dropdown (default: false)
          * @param {boolean=} options.disabledPlugin - Úplne vypnúť plugin (default: false)
          * @param {string=} options.languageChangeUrl - URL šablóna pre jazykové odkazy
+         * @param {string=} options.currencyChangeUrl - URL šablóna pre menové odkazy (ak nie je definovaná, použije sa callback systém)
          * @param {string=} options.languageLabel - Textový prefix pre výber jazyka
          * @param {string=} options.currencyLabel - Textový prefix pre výber meny
          * @param {boolean=} options.debug - Povoliť logovania do konzoly (default: false)
@@ -915,7 +951,8 @@
                         currency: options.currency,
                         currencies: currencies, // Používaj spracované currencies namiesto options.currencies
                         allowCurrencyChange: options.allowCurrencyChange,
-                        currencyLabel: options.currencyLabel
+                        currencyLabel: options.currencyLabel,
+                        currencyChangeUrl: options.currencyChangeUrl // NOVÁ OPTION
                     });
                 });
             } else {
