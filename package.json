@@ -1,0 +1,46 @@
+{
+  "name": "language-currency-switcher",
+  "version": "1.1.3",
+  "description": "Modern, accessible language and currency switcher with dual URL/callback modes. Supports dropdown and flags-only layouts with full accessibility features.",
+  "main": "src/language-currency-switcher.js",
+  "style": "src/language-currency-switcher.css",
+  "files": [
+    "src/",
+    "examples/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orszagh/Language-Currency-Switcher.git"
+  },
+  "keywords": [
+    "language",
+    "currency", 
+    "switcher",
+    "i18n",
+    "dropdown",
+    "jquery",
+    "accessibility",
+    "responsive",
+    "flags",
+    "multilingual",
+    "localization"
+  ],
+  "author": "Országh Ľubomír <lorszagh@ecopress.sk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/orszagh/Language-Currency-Switcher/issues"
+  },
+  "homepage": "https://github.com/orszagh/Language-Currency-Switcher#readme",
+  "dependencies": {
+    "jquery": ">=3.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
