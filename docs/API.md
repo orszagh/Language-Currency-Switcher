@@ -17,8 +17,8 @@ npm install language-currency-switcher
 
 ### CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/language-currency-switcher@1.1.3/src/language-currency-switcher.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/language-currency-switcher@1.1.3/src/language-currency-switcher.min.css">
+<script src="https://unpkg.com/language-currency-switcher@1.1.3/src/language-currency-switcher.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/language-currency-switcher@1.1.3/src/language-currency-switcher.css">
 ```
 
 ### Manual Download
@@ -32,21 +32,34 @@ Download the files from GitHub and include them in your project:
 
 ### HTML Structure
 ```html
-<div id="language-currency-switcher"></div>
+<div class="switch lang">
+    <button class="current" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+        <!-- Auto-generated content -->
+    </button>
+    <ul class="options" role="listbox">
+        <!-- Auto-generated language options -->
+    </ul>
+</div>
+
+<div class="switch currency">
+    <button class="current" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+        <!-- Auto-generated content -->
+    </button>
+    <ul class="options" role="listbox">
+        <!-- Auto-generated currency options -->
+    </ul>
+</div>
 ```
 
 ### JavaScript Initialization
 ```javascript
 $(document).ready(function() {
-    $('#language-currency-switcher').LCSwitcher({
-        languages: [
-            { code: 'sk', name: 'Slovenčina', flag: 'sk.png' },
-            { code: 'en', name: 'English', flag: 'gb.png' }
-        ],
-        currencies: [
-            { code: 'EUR', symbol: '€', name: 'Euro' },
-            { code: 'USD', symbol: '$', name: 'US Dollar' }
-        ]
+    LCSwitcher.init({
+        language: 'sk',
+        languages: ['sk|Slovenčina', 'en|English'],
+        currencies: ['eur|EUR €', 'usd|USD $'],
+        currencyChangeUrl: '/shop/change-currency/{CODE}', // Optional
+        allowCurrencyChange: true
     });
 });
 ```
@@ -55,17 +68,40 @@ $(document).ready(function() {
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `languages` | Array | `[]` | Array of language objects with `code`, `name`, and `flag` properties |
-| `currencies` | Array | `[]` | Array of currency objects with `code`, `symbol`, and `name` properties |
-| `flagPath` | String | `'flags/'` | Path to flag images directory |
-| `defaultLanguage` | String | `'sk'` | Default language code |
-| `defaultCurrency` | String | `'EUR'` | Default currency code |
-| `showLabels` | Boolean | `true` | Show/hide text labels next to flags and currency symbols |
-| `orientation` | String | `'horizontal'` | Layout orientation: `'horizontal'` or `'vertical'` |
-| `onlyFlags` | Boolean | `false` | Show only flags without language names |
-| `currencyChangeUrl` | String/Function | `null` | URL pattern or callback function for currency changes |
-| `theme` | String | `'default'` | Theme name: `'default'`, `'minimal'`, `'modern'` |
-| `animation` | Boolean | `true` | Enable/disable animations |
+| `language` | String | Auto-detect | Current language code |
+| `currency` | String | `'eur'` | Current currency code |
+| `languages` | Array | `[]` | Array of strings `"code|Label"` format |
+| `currencies` | Array | `[]` | Array of strings `"code|Label"` format |
+| `languageChangeUrl` | String | `'/Home/ChangeLanguage?code={CODE}'` | URL template for language changes |
+| `currencyChangeUrl` | String | `null` | URL template for currency changes (optional) |
+| `allowCurrencyChange` | Boolean | `true` | Show/hide currency switcher |
+| `onlyFlags` | Boolean | `false` | Show only flags horizontally without dropdown |
+| `disabledPlugin` | Boolean | `false` | Completely disable the plugin |
+| `languageLabel` | String | `''` | Text prefix for language switcher |
+| `currencyLabel` | String | `''` | Text prefix for currency switcher |
+| `debug` | Boolean | `false` | Enable console logging |
+
+## Methods
+
+### Initialize
+```javascript
+LCSwitcher.init(options);
+```
+
+### Enable Debug Mode
+```javascript
+LCSwitcher.enableDebug();
+```
+
+### Disable Debug Mode  
+```javascript
+LCSwitcher.disableDebug();
+```
+
+### Destroy Plugin
+```javascript
+LCSwitcher.destroy();
+```
 | `customClass` | String | `''` | Additional CSS class for the switcher container |
 
 ## Methods

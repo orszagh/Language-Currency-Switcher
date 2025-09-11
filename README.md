@@ -1,8 +1,15 @@
-# 🌍 Language & Currency Switcher v1.1.2
+# 🌍 Language & Currency Switcher v1.1.3
 
 Pokročilý jazykový a menový prepínač pre webové stránky s plnou podporou accessibility, klávesovej navigácie a responsívneho dizajnu.
 
-## ✨ Nové funkcie v1.1.2
+## ✨ Nové funkcie v1.1.3
+
+- 📦 **NPM balíček** - Profesionálne publikovaný na npmjs.com
+- 📁 **Reorganizovaná štruktúra** - src/examples/docs adresáre pre NPM distribúciu
+- 📚 **Rozšírená dokumentácia** - API.md a CHANGELOG.md pre vývojárov
+- 🔗 **currencyChangeUrl funkcia** - Duálny režim pre meny (URL/callback)
+
+## Funkcie z v1.1.2
 
 - 🏁 **OnlyFlags režim** - Zobrazenie vlajok horizontálne bez dropdown menu
 - 🔧 **Možnosť vypnutia pluginu** - Dočasné vypnutie prepínača

@@ -1043,6 +1043,7 @@
  * Predvolené nastavenie pre okamžité použitie
  * Prispôsobte tieto hodnoty pre vašu aplikáciu
  */
+/*
 $(document).ready(function () {
     if (window.LCSwitcher) {
         LCSwitcher.init({
@@ -1065,3 +1066,4 @@ $(document).ready(function () {
         });
     }
 });
+*/
