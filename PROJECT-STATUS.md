@@ -1,8 +1,8 @@
 # Language & Currency Switcher STAV PROJEKTU
 
-**Verzia:** 1.1.4  
-**Posledná aktualizácia:** 11. september 2025 - 16:45  
-**Stav:** PRIPRAVENÉ NA NPM PUBLIKÁCIU - VLASTNÉ VLAJKY IMPLEMENTOVANÉ
+**Verzia:** 1.1.5  
+**Posledná aktualizácia:** 11. september 2025 - 16:02  
+**Stav:** PRIPRAVENÉ NA NPM PUBLIKÁCIU - CLEANUP VERZIA
 
 ## PREHĽAD PROJEKTU
 **Language & Currency Switcher** je kompletný jazykový a menový prepínač publikovaný ako NPM balíček `language-currency-switcher`. Plugin poskytuje moderný dropdown UI s VLASTNÝMI SVG vlajkami, plnú accessibility a nové funkcie ako OnlyFlags režim a currencyChangeUrl duálny systém. **V1.1.4 ELIMINUJE všetky externé závislosti** - plugin je kompletne nezávislý.

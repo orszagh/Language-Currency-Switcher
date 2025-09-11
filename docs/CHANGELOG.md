@@ -5,6 +5,13 @@ Všetky významné zmeny v projekte Language & Currency Switcher budú zdokument
 Formát je založený na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 a tento projekt dodržiava [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.5] - 2025-09-11
+
+### Zmenené
+- Odstránený duplikovaný AI-KONTINUITA.md súbor
+- PROJECT-STATUS.md zostáva jediným zdrojom AI kontinuity
+- Vyčistená štruktúra projektu pre lepšiu organizáciu
+
 ## [1.1.4] - 2025-09-11
 
 ### Pridané

@@ -1,8 +1,14 @@
-# 🌍 Language & Currency Switcher v1.1.4
+# 🌍 Language & Currency Switcher v1.1.5 🌍 Language & Currency Switcher v1.1.4
 
 Pokročilý jazykový a menový prepínač pre webové stránky s plnou podporou accessibility, klávesovej navigácie a responsívneho dizajnu.
 
-## ✨ Nové funkcie v1.1.4
+## ✨ Nové funkcie v1.1.5
+
+- 🧹 **Cleanup release** - Odstránený duplikovaný AI-KONTINUITA.md súbor
+- 🎯 **Konzistentná štruktúra** - Iba PROJECT-STATUS.md pre AI kontinuitu
+- 📦 **Čistý NPM balíček** - Optimalizovaný obsah bez duplikátov
+
+## Funkcie z v1.1.4
 
 - 🏁 **Vlastné SVG vlajky** - Kompletne nezávislý plugin bez externých závislostí
 - 🎨 **Nové CSS triedy** - `.lcs-flag-*` namiesto `flag-icon-*` (BREAKING CHANGE)
@@ -382,6 +388,11 @@ Plugin bol testovaný na:
 
 ## 🔄 Changelog
 
+### v1.1.5 (2025-09-11)
+- 🧹 **Cleanup:** Odstránený duplikovaný AI-KONTINUITA.md súbor
+- 🎯 **Organizácia:** PROJECT-STATUS.md jediný zdroj AI kontinuity
+- 📦 **NPM:** Vyčistený balíček bez duplikátov
+
 ### v1.1.4 (2025-09-11)
 - 🏁 **Nové:** Vlastné SVG vlajky zahrnuté priamo v plugine
 - 🎨 **BREAKING CHANGE:** Nové CSS triedy `.lcs-flag-*` namiesto `flag-icon-*`
@@ -433,4 +444,4 @@ Príspevky sú vítané! Pre väčšie zmeny najprv otvorte issue pre diskusiu.
 
 ---
 
-**LCSwitcher v1.1.4** - Modernný, prístupný a výkonný jazykový prepínač pre web. 🚀
+**LCSwitcher v1.1.5** - Modernný, prístupný a výkonný jazykový prepínač pre web. 🚀
