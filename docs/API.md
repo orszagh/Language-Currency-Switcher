@@ -17,6 +17,7 @@ npm install language-currency-switcher
 
 ### CDN
 ```html
+<!-- Plugin Files (includes built-in SVG flags) -->
 <script src="https://unpkg.com/language-currency-switcher@1.1.3/src/language-currency-switcher.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/language-currency-switcher@1.1.3/src/language-currency-switcher.css">
 ```
@@ -24,9 +25,12 @@ npm install language-currency-switcher
 ### Manual Download
 Download the files from GitHub and include them in your project:
 ```html
+<!-- Plugin Files (includes built-in SVG flags) -->
 <script src="path/to/language-currency-switcher.js"></script>
 <link rel="stylesheet" href="path/to/language-currency-switcher.css">
 ```
+
+**Note:** No external dependencies for flags are required! The plugin includes its own SVG flags.
 
 ## Basic Usage
 

@@ -29,14 +29,21 @@ Pokročilý jazykový a menový prepínač pre webové stránky s plnou podporou
 
 ## 📦 Inštalácia
 
+### NPM inštalácia
+```bash
+npm install language-currency-switcher
+```
+
 ### 1. Zahrnutie súborov
+Plugin obsahuje vlastné SVG vlajky - žiadne externé závislosti nie sú potrebné!
+
 ```html
-<!-- CSS štýly -->
-<link rel="stylesheet" href="switcher-lang-currency-orso.css">
+<!-- Plugin CSS štýly (obsahuje aj vlajky) -->
+<link rel="stylesheet" href="src/language-currency-switcher.css">
 
 <!-- JavaScript (vyžaduje jQuery 3.0+) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="switcher-lang-currency-orso.js"></script>
+<script src="src/language-currency-switcher.js"></script>
 ```
 
 ### 2. HTML štruktúra (automaticky generovaná)
@@ -62,7 +69,7 @@ Pokročilý jazykový a menový prepínač pre webové stránky s plnou podporou
 </div>
 ```
 
-### 3. Inicializácia
+### 2. Inicializácia
 
 #### Základné použitie
 ```javascript
@@ -289,7 +296,7 @@ LCSwitcher.init({
 
 ## 🌍 Podporované vlajky
 
-Plugin automaticky generuje SVG vlajky pre tieto krajiny:
+Plugin obsahuje vlastné SVG vlajky pre tieto krajiny:
 
 - 🇸🇰 **SK** - Slovensko
 - 🇬🇧 **EN** - Anglicko  
@@ -301,12 +308,22 @@ Plugin automaticky generuje SVG vlajky pre tieto krajiny:
 - 🇨🇿 **CZ** - Česko
 - 🇵🇱 **PL** - Poľsko
 - 🇳🇱 **NL** - Holandsko
-- 🇦🇹 **AT** - Rakúsko
-- 🇨🇭 **CH** - Švajčiarsko
-- 🇧🇪 **BE** - Belgicko
-- 🇩🇰 **DK** - Dánsko
-- 🇸🇪 **SE** - Švédsko
-- 🇳🇴 **NO** - Nórsko
+- �� **RU** - Rusko
+- �� **PT** - Portugalsko
+
+### Pridanie vlastných vlajok
+
+Ak potrebujete vlajky pre iné krajiny, môžete si ich stiahnuť z:
+- **[Flag Icons](https://flagicons.lipis.dev/)** - Kompletná kolekcia SVG vlajok
+- **[Country Flags API](https://flagsapi.com/)** - REST API pre vlajky krajín
+
+Stačí pridať SVG súbor do priečinka `src/flags/` a aktualizovať CSS:
+
+```css
+.lcs-flag-[kód-krajiny] { 
+    background-image: url('flags/[kód-krajiny].svg'); 
+}
+```
 
 ## 🔗 Závislosti
 

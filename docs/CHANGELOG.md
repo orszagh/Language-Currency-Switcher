@@ -5,6 +5,27 @@ Všetky významné zmeny v projekte Language & Currency Switcher budú zdokument
 Formát je založený na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 a tento projekt dodržiava [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.4] - 2025-09-11
+
+### Pridané
+- Vlastné SVG vlajky zahrnuté priamo v plugine
+- Kompletne nezávislý plugin bez externých závislostí na vlajky
+- Nové CSS triedy `.lcs-flag` namiesto `flag-icon`
+- Podpora pre 12 krajín: SK, EN/GB, DE, FR, ES, IT, HU, CZ, PL, NL, RU, PT
+- Odporúčania na stiahnutie ďalších vlajok z Flag Icons a Country Flags API
+
+### Zmenené  
+- Odstránená závislosť na flag-icons balíčku z package.json
+- Aktualizované CSS štýly pre vlastné vlajky
+- Zmenené CSS triedy z `flag-icon-*` na `lcs-flag-*`
+- Aktualizovaná dokumentácia bez odkazov na flag-icons
+- Kompletne prerobené SCSS pre vlastné vlajky
+
+### Odstránené
+- Externá závislosť na flag-icons balíček
+- Kontrola prítomnosti flag-icons v JavaScript kóde
+- Varovania o chýbajúcej flag-icons knižnici
+
 ## [1.1.3] - 2025-09-11
 
 ### Pridané

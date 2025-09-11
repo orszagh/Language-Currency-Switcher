@@ -1,11 +1,11 @@
 # Language & Currency Switcher STAV PROJEKTU
 
-**Verzia:** 1.1.3  
-**Posledná aktualizácia:** 11. september 2025 - 09:55  
-**Stav:** PUBLIKOVANÉ NA NPM - NPM BALÍČEK DOSTUPNÝ
+**Verzia:** 1.1.4  
+**Posledná aktualizácia:** 11. september 2025 - 16:30  
+**Stav:** PRIPRAVENÉ NA PUBLIKÁCIU - VLASTNÉ VLAJKY IMPLEMENTOVANÉ
 
 ## PREHĽAD PROJEKTU
-**Language & Currency Switcher** je kompletný jazykový a menový prepínač publikovaný ako NPM balíček `language-currency-switcher`. Plugin poskytuje moderný dropdown UI s podporou vlajok, plnú accessibility a nové funkcie ako OnlyFlags režim a currencyChangeUrl duálny systém.
+**Language & Currency Switcher** je kompletný jazykový a menový prepínač publikovaný ako NPM balíček `language-currency-switcher`. Plugin poskytuje moderný dropdown UI s VLASTNÝMI SVG vlajkami, plnú accessibility a nové funkcie ako OnlyFlags režim a currencyChangeUrl duálny systém. **V1.1.4 ELIMINUJE všetky externé závislosti** - plugin je kompletne nezávislý.
 
 ### 🎯 HLAVNÉ CIELE PROJEKTU
 - Poskytovať moderný a prístupný jazykový prepínač
@@ -40,7 +40,16 @@
 - **package.json**: NPM konfigurácia s metadátami
 - **Inline komentáre**: Komentáre v kóde pre lepšie pochopenie
 
-### ✅ POSLEDNÉ VYLEPŠENIA (v1.1.3)
+### ✅ POSLEDNÉ VYLEPŠENIA (v1.1.4)
+- **🏁 VLASTNÉ SVG VLAJKY**: Zahrnuté priamo v plugine, žiadne externé závislosti
+- **🚫 Odstránené flag-icons**: Kompletne eliminované externé závislosti na vlajky
+- **🎨 Nové CSS triedy**: .lcs-flag-* namiesto flag-icon-* (BREAKING CHANGE)
+- **📁 Štruktúra vlajok**: /src/flags/{kód}.svg - 12 krajín (SK,EN,DE,FR,ES,IT,HU,CZ,PL,NL,RU,PT)
+- **⚡ Nulové HTTP požiadavky**: Všetky vlajky CSS background-image
+- **🔧 Rozšíriteľnosť**: Jednoduché pridanie vlastných vlajok + návod v dokumentácii
+- **📚 AI kontinuita**: Kompletne aktualizovaná pre budúce AI interakcie
+
+### ✅ VYLEPŠENIA (v1.1.3)
 - **NPM publikácia**: Balíček úspešne publikovaný na npmjs.com
 - **Profesionálna štruktúra**: Reorganizácia do src/examples/docs adresárov
 - **Premenované súbory**: language-currency-switcher.* pre konzistentnosť
@@ -56,23 +65,27 @@
 
 ## TECHNICKÁ ARCHITEKTÚRA
 
-### ŠTRUKTÚRA SÚBOROV (NPM v1.1.3)
+### ŠTRUKTÚRA SÚBOROV (NPM v1.1.4)
 ```
 language-currency-switcher/
 ├── src/                                      # NPM hlavné súbory
-│   ├── language-currency-switcher.js        # Hlavný plugin
-│   ├── language-currency-switcher.css       # Kompilované CSS
-│   └── language-currency-switcher.scss      # Zdrojové štýly
+│   ├── language-currency-switcher.js        # Hlavný plugin s vlastnými vlajkami
+│   ├── language-currency-switcher.css       # Kompilované CSS s .lcs-flag-* triedami
+│   ├── language-currency-switcher.scss      # Zdrojové štýly s vlastnými vlajkami
+│   └── flags/                               # 🆕 VLASTNÉ SVG VLAJKY
+│       ├── sk.svg, en.svg, de.svg, fr.svg  # Západná Európa
+│       ├── es.svg, it.svg, hu.svg, cz.svg  # Stredná/Južná Európa  
+│       ├── pl.svg, nl.svg, ru.svg, pt.svg  # Východ/Sever
 ├── examples/                                 # Príklady použitia
 │   └── initialization-examples.js           # 24 príkladov inicializácie
 ├── docs/                                     # Dokumentácia
 │   ├── API.md                               # Anglická API dokumentácia
 │   └── CHANGELOG.md                         # História verzií
-├── package.json                             # NPM konfigurácia
+├── package.json                             # NPM konfigurácia (bez flag-icons!)
 ├── .npmignore                               # NPM exclude súbory
 ├── LICENSE                                  # MIT licencia
 ├── README.md                                # Slovenská dokumentácia
-├── PROJECT-STATUS.md                        # Tento súbor
+├── PROJECT-STATUS.md                        # Tento súbor - AI kontinuita
 └── [legacy files]                           # Spätná kompatibilita
     ├── switcher-lang-currency-orso.js       # Starší názov súboru
     ├── switcher-lang-currency-orso.scss     
@@ -94,10 +107,10 @@ import 'language-currency-switcher/src/language-currency-switcher.js';
 <link rel="stylesheet" href="https://unpkg.com/language-currency-switcher@1.1.3/src/language-currency-switcher.css">
 ```
 
-### ZÁVISLOSTI
-- **jQuery 3.0+**: Základná závislosť pre DOM manipuláciu
+### ZÁVISLOSTI (v1.1.4)
+- **jQuery 3.0+**: Jediná závislosť pre DOM manipuláciu  
 - **NPM**: Node.js 14.0+ pre inštaláciu balíčka
-- **Vlajky**: Obrázky vlajok v používateľskom `/flags/` adresári
+- **🚫 ŽIADNE VLAJKY**: Plugin obsahuje vlastné SVG vlajky - žiadne externé súbory!
 - **SCSS kompilácia**: Automaticky kompilované pre NPM distribúciu
 
 ### CSS CUSTOM PROPERTIES
@@ -246,27 +259,54 @@ Užívatelia môžu prepísať akúkoľvek z 67 CSS custom properties:
 
 ## POZNÁMKY PRE AI KONTINUITU
 
-### Kľúčové informácie pre budúce AI sessions
-- **NPM balíček publikovaný**: `language-currency-switcher` v1.1.3 dostupný na npmjs.com
-- **Štruktúra súborov**: src/examples/docs organizácia pre NPM distribúciu
-- **Hlavné súbory**: language-currency-switcher.js/css v src/ adresári
-- **Spätná kompatibilita**: Staré switcher-lang-currency-orso.* súbory zachované
-- **Dokumentácia**: README.md (SK) + docs/API.md (EN) + docs/CHANGELOG.md
-- **Všetky funkcie funkčné**: currencyChangeUrl, OnlyFlags, disablePlugin - pripravené na produkčné použitie
-- **NPM workflow**: Užívatelia inštalujú cez `npm install language-currency-switcher`
+### 🧠 KĽÚČOVÉ INFORMÁCIE PRE BUDÚCE AI SESSIONS
 
-### Nedávny kontext (v1.1.3)
+#### NPM Balíček (v1.1.4)
+- **NPM balíček pripravený**: `language-currency-switcher` v1.1.4 s vlastnými vlajkami
+- **Žiadne externé závislosti**: Kompletne nezávislý plugin (odstránené flag-icons)
+- **Štruktúra súborov**: src/examples/docs organizácia + src/flags/ pre SVG vlajky
+- **Hlavné súbory**: language-currency-switcher.js/css v src/ adresári
+
+#### 🏁 VLASTNÉ VLAJKY (KĽÚČOVÉ!)
+- **CSS triedy**: `.lcs-flag .lcs-flag-{kód}` (NIE `.flag-icon-*`!)
+- **SVG súbory**: `/src/flags/{kód}.svg` - 12 krajín podporovaných
+- **Mapovanie**: `getFlagCode(langCode)` funkcia (en->gb, sk->sk)
+- **Generovanie**: `createFlagSpan(langCode)` produkuje `<span class="lcs-flag lcs-flag-{kód}">`
+- **Pridanie novej vlajky**: 1) SVG do /src/flags/ 2) CSS .lcs-flag-{kód} 3) getFlagCode() ak treba
+
+#### Podporované krajiny
+- **Západ:** SK, EN/GB, DE, FR, ES, IT
+- **Stred/Východ:** HU, CZ, PL, NL, RU, PT
+- **Rozšírenie:** Flag Icons (flagicons.lipis.dev), Country Flags API (flagsapi.com)
+
+#### 🚨 KRITICKÉ VARENIA PRE AI
+- **NIKDY nepoužívať** `flag-icon-*` CSS triedy - iba `lcs-flag-*`!
+- **NIKDY nepridávať** flag-icons do package.json dependencies
+- **VŽDY kontrolovať** dostupnosť SVG v `/src/flags/` pred použitím
+- **VŽDY používať** `getFlagCode()` pre správne mapovanie jazykov
+
+### Nedávny kontext (v1.1.4)
+- Implementácia vlastných SVG vlajok bez externých závislostí
+- Zmena CSS tried z flag-icon-* na lcs-flag-*
+- Aktualizácia dokumentácie a AI kontinuity
+- Odstránenie flag-icons zo všetkých závislostí
+- Plugin je teraz kompletne nezávislý
+
+### Starší kontext (v1.1.3)
 - Úspešná NPM publikácia balíčka language-currency-switcher
 - Reorganizácia súborov do profesionálnej NPM štruktúry
 - Vytvorenie komplexnej API dokumentácie v angličtine
 - Rozšírenie príkladov s chýbajúcimi currencyChangeUrl možnosťami
-- GitHub tag v1.1.3 vytvorený a pushnutý
 
-### Kritické súbory (NPM štruktúra)
-- `src/language-currency-switcher.js` - Hlavný plugin pre NPM
-- `src/language-currency-switcher.scss` - Zdrojové štýly (editovať toto)
+### Kritické súbory (NPM štruktúra v1.1.4)
+- `src/language-currency-switcher.js` - Hlavný plugin s vlastnými vlajkami (.lcs-flag-*)
+- `src/language-currency-switcher.scss` - Zdrojové štýly s vlastnými vlajkami (editovať toto)
+- `src/flags/*.svg` - 12 SVG vlajok krajín (SK,EN,DE,FR,ES,IT,HU,CZ,PL,NL,RU,PT)
 - `examples/initialization-examples.js` - 24 príkladov použitia
-- `docs/API.md` - Anglická API dokumentácia
+- `docs/API.md` - Anglická API dokumentácia (aktualizovaná pre vlastné vlajky)
+- `docs/CHANGELOG.md` - História zmien (v1.1.4 sekcia o vlajkách)
+- `package.json` - NPM konfigurácia (bez flag-icons dependencies!)
+- `PROJECT-STATUS.md` - Tento súbor s AI kontinuitou
 - `docs/CHANGELOG.md` - História verzií
 - `README.md` - Hlavná dokumentácia v slovenčine
 - `package.json` - NPM konfigurácia
