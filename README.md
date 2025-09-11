@@ -1,8 +1,16 @@
-# 🌍 Language & Currency Switcher v1.1.3
+# 🌍 Language & Currency Switcher v1.1.4
 
 Pokročilý jazykový a menový prepínač pre webové stránky s plnou podporou accessibility, klávesovej navigácie a responsívneho dizajnu.
 
-## ✨ Nové funkcie v1.1.3
+## ✨ Nové funkcie v1.1.4
+
+- 🏁 **Vlastné SVG vlajky** - Kompletne nezávislý plugin bez externých závislostí
+- 🎨 **Nové CSS triedy** - `.lcs-flag-*` namiesto `flag-icon-*` (BREAKING CHANGE)
+- 🌍 **12 zahrnutých vlajok** - SK, EN, DE, FR, ES, IT, HU, CZ, PL, NL, RU, PT
+- 🔗 **Odporúčania zdrojov** - Návod na stiahnutie ďalších vlajok z Flag Icons a Country Flags API
+- 📦 **Zero dependencies** - Odstránená závislosť na flag-icons balíčku
+
+## Funkcie z v1.1.3
 
 - 📦 **NPM balíček** - Profesionálne publikovaný na npmjs.com
 - 📁 **Reorganizovaná štruktúra** - src/examples/docs adresáre pre NPM distribúciu
@@ -374,6 +382,19 @@ Plugin bol testovaný na:
 
 ## 🔄 Changelog
 
+### v1.1.4 (2025-09-11)
+- 🏁 **Nové:** Vlastné SVG vlajky zahrnuté priamo v plugine
+- 🎨 **BREAKING CHANGE:** Nové CSS triedy `.lcs-flag-*` namiesto `flag-icon-*`
+- 🌍 **Nové:** 12 zahrnutých vlajok krajín bez externých závislostí
+- 📦 **Odstránené:** Závislosť na flag-icons balíček
+- 🔗 **Nové:** Odporúčania na stiahnutie ďalších vlajok
+
+### v1.1.3 (2025-09-11)
+- 📦 **Nové:** NPM balíček štruktúra s profesionálnou organizáciou
+- 📚 **Nové:** Podrobná API dokumentácia v docs/API.md
+- 🔗 **Nové:** currencyChangeUrl funkcia pre duálny režim mien
+- 📁 **Zmenené:** Reorganizované súbory do src/examples/docs adresárov
+
 ### v1.1.2 (2025-09-08)
 - 📚 **Nové:** Kompletná slovenská dokumentácia
 - 🔧 **Opravené:** GitHub synchronizácia dokumentácie
@@ -412,4 +433,4 @@ Príspevky sú vítané! Pre väčšie zmeny najprv otvorte issue pre diskusiu.
 
 ---
 
-**LCSwitcher v1.1.2** - Modernný, prístupný a výkonný jazykový prepínač pre web. 🚀
+**LCSwitcher v1.1.4** - Modernný, prístupný a výkonný jazykový prepínač pre web. 🚀

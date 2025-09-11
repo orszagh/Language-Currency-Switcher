@@ -1,8 +1,8 @@
 # Language & Currency Switcher STAV PROJEKTU
 
 **Verzia:** 1.1.4  
-**Posledná aktualizácia:** 11. september 2025 - 16:30  
-**Stav:** PRIPRAVENÉ NA PUBLIKÁCIU - VLASTNÉ VLAJKY IMPLEMENTOVANÉ
+**Posledná aktualizácia:** 11. september 2025 - 16:45  
+**Stav:** PRIPRAVENÉ NA NPM PUBLIKÁCIU - VLASTNÉ VLAJKY IMPLEMENTOVANÉ
 
 ## PREHĽAD PROJEKTU
 **Language & Currency Switcher** je kompletný jazykový a menový prepínač publikovaný ako NPM balíček `language-currency-switcher`. Plugin poskytuje moderný dropdown UI s VLASTNÝMI SVG vlajkami, plnú accessibility a nové funkcie ako OnlyFlags režim a currencyChangeUrl duálny systém. **V1.1.4 ELIMINUJE všetky externé závislosti** - plugin je kompletne nezávislý.
@@ -19,6 +19,7 @@
 ## AKTUÁLNY STAV
 
 ### ✅ DOKONČENÉ FUNKCIE
+- **Vlastné SVG Vlajky** (v1.1.4): Kompletne nezávislý plugin bez externých závislostí
 - **NPM Balíček** (v1.1.3): Publikovaný na npmjs.com ako `language-currency-switcher`
 - **Hlavný Plugin**: jQuery plugin s kompletným API a currencyChangeUrl option
 - **NPM Štruktúra**: Profesionálna štruktúra src/examples/docs pre distribúciu
@@ -27,7 +28,7 @@
 - **Vypnutie Pluginu**: Možnosť dočasného vypnutia
 - **Currency URL Option**: Meny môžu fungovať ako odkazy alebo callback
 - **Debug Systém**: Rozšírený debugging pre vývoj
-- **Vlajky**: Automatické generovanie vlajok pre 15+ krajín
+- **Zero Dependencies**: Odstránená flag-icons závislosť, vlastné CSS triedy .lcs-flag-*
 - **Responzívny Dizajn**: Plne responzívny na všetkých zariadeniach
 - **Výkon**: Optimalizované animácie a prechody
 
@@ -312,7 +313,7 @@ Užívatelia môžu prepísať akúkoľvek z 67 CSS custom properties:
 - `package.json` - NPM konfigurácia
 - `PROJECT-STATUS.md` - Tento statusový súbor v slovenčine
 
-**Stav:** PUBLIKOVANÉ NA NPM - v1.1.3 dostupná pre celý svet
+**Stav:** PRIPRAVENÉ NA PUBLIKÁCIU NPM - v1.1.4 s vlastnými vlajkami
 
 ---
 **Posledná synchronizácia s NPM:** 11. september 2025 - 09:56  
