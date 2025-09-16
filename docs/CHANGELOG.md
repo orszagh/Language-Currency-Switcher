@@ -5,6 +5,26 @@ Všetky významné zmeny v projekte Language & Currency Switcher budú zdokument
 Formát je založený na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 a tento projekt dodržiava [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-09-16
+
+### Pridané
+- OnlyCurrency mód pre zobrazenie menových symbolov vedľa seba
+- Nová konfiguračná možnosť `onlyCurrency: true`
+- Kompletné CSS štýly pre `.switch-currency-only` mód
+- Symetrické módy: onlyFlags a onlyCurrency s rovnakým štýlovaním
+- Rozšírená SCSS architektúra pre currency symboly
+- Konzistentné animácie a hover efekty medzi only módmi
+
+### Zmenené
+- Vylepšené štýlovanie pre konzistentný vzhľad medzi vlajkami a menami
+- Responzívne správanie pre oba only módy
+- Aktualizovaná dokumentácia OPTIONS.md s onlyCurrency príkladmi
+- Rozšírená API dokumentácia pre nové možnosti
+
+### Opravené
+- Konzistentné medzery a padding medzi onlyFlags a onlyCurrency módmi
+- Symetrické animácie pre oba only módy
+
 ## [1.1.5] - 2025-09-11
 
 ### Zmenené

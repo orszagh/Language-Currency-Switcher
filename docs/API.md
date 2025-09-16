@@ -80,6 +80,7 @@ $(document).ready(function() {
 | `currencyChangeUrl` | String | `null` | URL template for currency changes (optional) |
 | `allowCurrencyChange` | Boolean | `true` | Show/hide currency switcher |
 | `onlyFlags` | Boolean | `false` | Show only flags horizontally without dropdown |
+| `onlyCurrency` | Boolean | `false` | Show only currencies horizontally without dropdown |
 | `disabledPlugin` | Boolean | `false` | Completely disable the plugin |
 | `languageLabel` | String | `''` | Text prefix for language switcher |
 | `currencyLabel` | String | `''` | Text prefix for currency switcher |
@@ -282,6 +283,39 @@ $('#switcher').LCSwitcher({
 $('#switcher').on('languageChanged', function(event, langCode) {
     // Redirect to localized version
     window.location.href = '/' + langCode + window.location.pathname;
+});
+```
+
+### OnlyCurrency Mode (v1.2.0)
+```javascript
+// Currency symbols only (no dropdown)
+LCSwitcher.init({
+    currency: 'eur',
+    currencies: [
+        'eur|€',
+        'usd|$',
+        'czk|Kč',
+        'gbp|£'
+    ],
+    currencyLabel: 'Currency:',
+    currencyChangeUrl: '/change-currency/{CODE}',
+    onlyCurrency: true,
+    allowCurrencyChange: true
+});
+```
+
+### Combined OnlyFlags + OnlyCurrency
+```javascript
+// Both languages and currencies as horizontal lists
+LCSwitcher.init({
+    language: 'en',
+    currency: 'eur',
+    languages: ['en|English', 'sk|Slovenčina', 'de|Deutsch'],
+    currencies: ['eur|€', 'usd|$', 'czk|Kč'],
+    languageChangeUrl: '/change-language/{CODE}',
+    currencyChangeUrl: '/change-currency/{CODE}',
+    onlyFlags: true,
+    onlyCurrency: true
 });
 ```
 

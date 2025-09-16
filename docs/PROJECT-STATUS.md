@@ -1,11 +1,11 @@
 # Language & Currency Switcher STAV PROJEKTU
 
-**Verzia:** 1.1.5  
-**Posledná aktualizácia:** 11. september 2025 - 16:02  
-**Stav:** PRIPRAVENÉ NA NPM PUBLIKÁCIU - CLEANUP VERZIA
+**Verzia:** 1.2.0  
+**Posledná aktualizácia:** 16. september 2025 - 14:30  
+**Stav:** PRIPRAVENÉ NA NPM PUBLIKÁCIU - ONLYCURRENCY FEATURE RELEASE
 
 ## PREHĽAD PROJEKTU
-**Language & Currency Switcher** je kompletný jazykový a menový prepínač publikovaný ako NPM balíček `language-currency-switcher`. Plugin poskytuje moderný dropdown UI s VLASTNÝMI SVG vlajkami, plnú accessibility a nové funkcie ako OnlyFlags režim a currencyChangeUrl duálny systém. **V1.1.4 ELIMINUJE všetky externé závislosti** - plugin je kompletne nezávislý.
+**Language & Currency Switcher** je kompletný jazykový a menový prepínač publikovaný ako NPM balíček `language-currency-switcher`. Plugin poskytuje moderný dropdown UI s VLASTNÝMI SVG vlajkami, plnú accessibility a nové funkcie ako OnlyFlags režim, OnlyCurrency režim a currencyChangeUrl duálny systém. **V1.1.4+ ELIMINUJE všetky externé závislosti** - plugin je kompletne nezávislý.
 
 ### 🎯 HLAVNÉ CIELE PROJEKTU
 - Poskytovať moderný a prístupný jazykový prepínač
@@ -184,7 +184,20 @@ Užívatelia môžu prepísať akúkoľvek z 67 CSS custom properties:
 
 ## VYRIEŠENÉ PROBLÉMY
 
-### NAJNOVŠIE FUNKCIE (v1.1.3 - 11. september 2025)
+### NAJNOVŠIE FUNKCIE (v1.2.0 - 16. september 2025)
+1. **onlyCurrency režim**: Implementovaný kompaktný prepínač iba pre meny bez dropdown
+2. **Konzistentný styling**: Zjednotený dizajn medzi onlyFlags a onlyCurrency s rovnakými animáciami
+3. **Bug fix**: Opravený displayText undefined error v debug logovaní
+4. **Rozšírená dokumentácia**: Aktualizované OPTIONS.md s onlyCurrency možnosťami
+5. **Samostatné currency spany**: Meny sú oddelené do nezávislých span elementov
+6. **URL navigácia**: onlyCurrency podporuje currencyChangeUrl aj callback mód
+
+### Funkcie z v1.1.5 (11. september 2025)
+1. **Cleanup release**: Odstránený duplikovaný AI-KONTINUITA.md súbor
+2. **Konzistentná štruktúra**: Iba PROJECT-STATUS.md pre AI kontinuitu
+3. **Čistý NPM balíček**: Optimalizovaný obsah bez duplikátov
+
+### Funkcie z v1.1.3 (11. september 2025)
 1. **NPM publikácia**: Balíček úspešne publikovaný na https://www.npmjs.com/package/language-currency-switcher
 2. **Profesionálna štruktúra**: Reorganizácia súborov do src/examples/docs adresárov
 3. **Premenované súbory**: Všetky súbory premenované na language-currency-switcher.*

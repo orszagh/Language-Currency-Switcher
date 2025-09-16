@@ -21,6 +21,10 @@ tests/
 *.md.backup
 *.md.temp
 
+# Project specific development files
+docs/PROJECT-STATUS.md    # AI kontinuita - nepotrebná pre NPM
+*.scss                    # SCSS zdrojové súbory - publikujeme len CSS
+
 # OS generated files
 .DS_Store
 .DS_Store?

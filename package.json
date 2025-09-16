@@ -1,7 +1,7 @@
 {
   "name": "language-currency-switcher",
-  "version": "1.1.5",
-  "description": "Modern, accessible language and currency switcher with dual URL/callback modes. Supports dropdown and flags-only layouts with full accessibility features.",
+  "version": "1.2.0",
+  "description": "Modern, accessible language and currency switcher with dual URL/callback modes. Supports dropdown, flags-only, and currency-only layouts with full accessibility features.",
   "main": "src/language-currency-switcher.js",
   "style": "src/language-currency-switcher.css",
   "files": [

@@ -1,5 +1,5 @@
 /*
- * Prepínač jazykov a mien SCSS v1.1.4
+ * Prepínač jazykov a mien SCSS v1.2.0
  * ====================================
  * 
  * KOMPLETNÝ SYSTÉM CSS CUSTOM PROPERTIES
@@ -36,7 +36,8 @@
     --tp-lang-switcher-primary-color: #3498DB;
     --tp-lang-switcher-text-color: #313436;
     --tp-lang-switcher-text-color-hover: #262f39;
-    --tp-lang-switcher-bg-color: #ffffff;
+    --tp-lang-switcher-bg-color: transparent;
+    --tp-lang-switcher-dropdown-bg-color: #ffffff;
     --tp-lang-switcher-bg-hover: rgba(0, 0, 0, 0.05);
     --tp-lang-switcher-border-color: transparent;
     --tp-lang-switcher-shadow-color: rgba(0, 0, 0, 0.4);
@@ -121,8 +122,8 @@
     --tp-lang-switcher-shadow-mobile: 0 8px 32px rgba(0, 0, 0, 0.3);
     
     // === VLAJKY ===
-    --tp-lang-switcher-flag-size: 20px;
-    --tp-lang-switcher-flag-size-mobile: 18px;
+    --tp-lang-switcher-flag-size: 24px;
+    --tp-lang-switcher-flag-size-mobile: 20px;
     --tp-lang-switcher-flag-border-radius: 2px;
     --tp-lang-switcher-flag-path: 'flags/';
 }
@@ -196,7 +197,7 @@ $mobile-breakpoint: 768px;
 
 // Vlastné SVG vlajky pre podporované jazyky
 .lcs-flag-sk { background-image: url('flags/sk.svg'); }
-.lcs-flag-en, .lcs-flag-gb { background-image: url('flags/en.svg'); }
+.lcs-flag-en, .lcs-flag-gb { background-image: url('flags/gb.svg'); }
 .lcs-flag-de { background-image: url('flags/de.svg'); }
 .lcs-flag-fr { background-image: url('flags/fr.svg'); }
 .lcs-flag-es { background-image: url('flags/es.svg'); }
@@ -219,7 +220,7 @@ $mobile-breakpoint: 768px;
     transition: background-color var(--tp-lang-switcher-transition-fast);
     color: var(--tp-lang-switcher-text-color); // DÔLEŽITÉ: nastavenie farby textu
     border: var(--tp-lang-switcher-border-width) solid var(--tp-lang-switcher-border-color);
-    
+    /*
     &:hover {
         background-color: var(--tp-lang-switcher-bg-hover);
         
@@ -231,10 +232,10 @@ $mobile-breakpoint: 768px;
             color: var(--tp-lang-switcher-text-color-hover);
         }
     }
+        */
 }
 
 .current {
-    text-transform: uppercase;
     height: var(--tp-lang-switcher-switch-height);
     position: relative;
     z-index: var(--tp-lang-switcher-z-index-current);
@@ -260,6 +261,32 @@ $mobile-breakpoint: 768px;
         line-height: var(--tp-lang-switcher-line-height);
         user-select: none;
         flex: 1;
+    }
+    
+    // Nové štýly pre currency label a value
+    .currency-label {
+        display: inline-block;
+        font-family: var(--tp-lang-switcher-font-family);
+        font-size: var(--tp-lang-switcher-label-font-size);
+        font-weight: var(--tp-lang-switcher-label-font-weight);
+        color: var(--tp-lang-switcher-text-color);
+        line-height: var(--tp-lang-switcher-line-height);
+        user-select: none;
+        margin-right: calc(var(--tp-lang-switcher-switch-gap) / 2);
+        
+        @media (max-width: var(--tp-lang-switcher-mobile-breakpoint)) {
+            font-size: var(--tp-lang-switcher-label-font-size-mobile);
+            margin-right: 4px;
+        }
+    }
+    
+    .currency-value {
+        display: inline-block;
+        text-transform: uppercase;
+        line-height: var(--tp-lang-switcher-line-height);
+        user-select: none;
+        font-weight: var(--tp-lang-switcher-font-weight);
+        color: var(--tp-lang-switcher-text-color);
     }
 
     .dropdown-arrow {
@@ -308,6 +335,10 @@ $mobile-breakpoint: 768px;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
     background: var(--tp-lang-switcher-bg-color);
 
+    &.options-lang, &.options-currency {
+        background: var(--tp-lang-switcher-dropdown-bg-color);
+    }
+
     .switch.show-options & {
         display: block;
         z-index: var(--tp-lang-switcher-z-index-options);
@@ -320,7 +351,6 @@ $mobile-breakpoint: 768px;
     .switch.show-shadow & {
         box-shadow: 0 2px 12px -4px var(--tp-lang-switcher-shadow-color);
     }
-
     // Mobilné zobrazenie - centrovanie na obrazovku
     @media (max-width: $mobile-breakpoint) {
         position: fixed;
@@ -347,7 +377,6 @@ $mobile-breakpoint: 768px;
         .switch.show-shadow & {
             box-shadow: var(--tp-lang-switcher-shadow-mobile);
         }
-
         // Počiatočný stav pre animáciu
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.9);
@@ -423,7 +452,7 @@ $mobile-breakpoint: 768px;
         font-size: var(--tp-lang-switcher-list-font-size);
         line-height: var(--tp-lang-switcher-line-height);
         white-space: nowrap;
-        background: var(--tp-lang-switcher-bg-color);
+        background: var(--tp-lang-switcher-dropdown-bg-color);
 
         // Layout pre vlajky v options
         .lang-link, .currency-link {
@@ -599,6 +628,20 @@ $mobile-breakpoint: 768px;
 
 /* --- ONLY FLAGS REŽIM --- */
 .switch-flags-only {
+    .flags-label {
+        display: inline-block;
+        font-size: var(--tp-lang-switcher-label-font-size);
+        font-weight: var(--tp-lang-switcher-label-font-weight);
+        color: var(--tp-lang-switcher-text-color);
+        margin-right: var(--tp-lang-switcher-switch-gap);
+        line-height: var(--tp-lang-switcher-line-height);
+        
+        @media (max-width: var(--tp-lang-switcher-mobile-breakpoint)) {
+            font-size: var(--tp-lang-switcher-label-font-size-mobile);
+            margin-right: 6px;
+        }
+    }
+    
     .flags-container {
         display: flex;
         align-items: center;
@@ -612,7 +655,7 @@ $mobile-breakpoint: 768px;
         padding: 0.75rem;
         
         // Jemný tieň pre definíciu
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        //box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         
         @media (max-width: $mobile-breakpoint) {
             gap: 12px;
@@ -666,6 +709,94 @@ $mobile-breakpoint: 768px;
         }
         
         // Focus accessibility
+        &:focus {
+            outline: var(--tp-lang-switcher-focus-width) solid var(--tp-lang-switcher-focus-color);
+            outline-offset: var(--tp-lang-switcher-focus-offset);
+        }
+    }
+}
+
+/* --- ONLY CURRENCY REŽIM --- */
+.switch-currency-only {
+    .currency-label {
+        display: inline-block;
+        font-size: var(--tp-lang-switcher-label-font-size);
+        font-weight: var(--tp-lang-switcher-label-font-weight);
+        color: var(--tp-lang-switcher-text-color);
+        margin-right: var(--tp-lang-switcher-switch-gap);
+        line-height: var(--tp-lang-switcher-line-height);
+
+        @media (max-width: var(--tp-lang-switcher-mobile-breakpoint)) {
+            font-size: var(--tp-lang-switcher-label-font-size-mobile);
+            margin-right: 6px;
+        }
+    }
+
+    .currency-container {
+        display: flex;
+        align-items: center;
+        gap: var(--tp-lang-switcher-switch-gap);
+        padding: var(--tp-lang-switcher-switch-padding);
+        background: var(--tp-lang-switcher-bg-color);
+        border-radius: var(--tp-lang-switcher-border-radius);
+        // Vonkajší priestor - rovnaký ako pre vlajky
+        margin: 0.5rem;
+        padding: 0.75rem;
+
+        @media (max-width: $mobile-breakpoint) {
+            gap: 12px;
+            padding: 0.6rem;
+            margin: 0.25rem;
+        }
+    }
+
+    .currency-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem;
+        border-radius: var(--tp-lang-switcher-border-radius);
+        transition: all var(--tp-lang-switcher-transition-fast);
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        // Štýl pre text meny
+        .currency-text {
+            display: inline-block;
+            font-size: var(--tp-lang-switcher-font-size);
+            font-weight: 500;
+            line-height: 1;
+            min-width: 2.5rem;
+            text-align: center;
+            white-space: nowrap;
+
+            @media (max-width: $mobile-breakpoint) {
+                font-size: var(--tp-lang-switcher-font-size-mobile);
+                min-width: 2rem;
+            }
+        }
+        // Hover efekt - rovnaký ako pre vlajky
+        &:hover {
+            background: var(--tp-lang-switcher-bg-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+        // Aktívna mena - rovnaký štýl ako aktívna vlajka
+        &.active {
+            background: var(--tp-lang-switcher-primary-color);
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            color: white;
+
+            .currency-text {
+                color: white;
+            }
+
+            &:hover {
+                background: var(--tp-lang-switcher-primary-color);
+                transform: translateY(-1px);
+            }
+        }
+        // Focus accessibility - rovnaký ako pre vlajky
         &:focus {
             outline: var(--tp-lang-switcher-focus-width) solid var(--tp-lang-switcher-focus-color);
             outline-offset: var(--tp-lang-switcher-focus-offset);

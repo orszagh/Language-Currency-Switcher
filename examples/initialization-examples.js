@@ -1,8 +1,8 @@
-// Language & Currency Switcher v1.1.3 - Príklady inicializácie
+// Language & Currency Switcher v1.2.0 - Príklady inicializácie
 // ==============================================================
 // 
 // AI KONTINUITA: Tento súbor obsahuje kompletné príklady použitia LCSwitcher pluginu
-// s najnovšími funkciami vrátane currencyChangeUrl option a NPM distribúcie v1.1.3
+// s najnovšími funkciami vrátane onlyCurrency režimu a NPM distribúcie v1.2.0
 // 
 // KOMPLETNÁ REFERENCIA VŠETKÝCH OPTIONS:
 // ======================================
@@ -29,6 +29,7 @@
  * 
  * ŠPECIÁLNE REŽIMY (v1.1.0+):
  * - onlyFlags: false            // true = iba vlajky horizontálne, false = dropdown
+ * - onlyCurrency: false         // true = iba meny horizontálne, false = dropdown (NOVÉ v1.2.0)
  * - disabledPlugin: false       // true = úplne skryje plugin, false = normálne fungovanie
  * 
  * DEBUG A DEVELOPMENT:
@@ -445,5 +446,79 @@ LCSwitcher.init({
     currencyLabel: 'Mena nákupu:',
     languageChangeUrl: '/api/set-language/{CODE}',
     currencyChangeUrl: '/api/set-currency/{CODE}', // Oba s odkazmi
+    allowCurrencyChange: true
+});
+
+/* ===============================
+ * NOVÉ FUNKCIE v1.2.0
+ * ===============================
+ */
+
+// 14. OnlyCurrency režim - iba meny vedľa seba s URL navigáciou
+LCSwitcher.init({
+    currency: 'eur',
+    currencies: [
+        'eur|€',
+        'usd|$',
+        'czk|Kč',
+        'gbp|£'
+    ],
+    currencyLabel: 'Mena:',
+    currencyChangeUrl: '/shop/change-currency/{CODE}',
+    onlyCurrency: true,  // NOVÉ: Iba meny horizontálne
+    allowCurrencyChange: true,
+    debug: true
+});
+
+// 15. OnlyCurrency režim s callback systémom
+LCSwitcher.init({
+    currency: 'czk',
+    currencies: [
+        'eur|EUR €',
+        'czk|CZK Kč',
+        'usd|USD $',
+        'pln|PLN zł'
+    ],
+    currencyLabel: 'Platba:',
+    // currencyChangeUrl nie je definovaná = callback systém
+    onlyCurrency: true,
+    allowCurrencyChange: true
+});
+
+// 16. Kombinovaný režim: OnlyFlags + OnlyCurrency
+LCSwitcher.init({
+    language: 'sk',
+    currency: 'eur',
+    languages: [
+        'sk|Slovenčina',
+        'en|English',
+        'de|Deutsch'
+    ],
+    currencies: [
+        'eur|€',
+        'czk|Kč',
+        'usd|$'
+    ],
+    languageLabel: 'Jazyk:',
+    currencyLabel: 'Mena:',
+    languageChangeUrl: '/change-language/{CODE}',
+    currencyChangeUrl: '/change-currency/{CODE}',
+    onlyFlags: true,     // Vlajky vedľa seba
+    onlyCurrency: true,  // Meny vedľa seba
+    allowCurrencyChange: true
+});
+
+// 17. OnlyCurrency bez labelu (iba symboly)
+LCSwitcher.init({
+    currency: 'usd',
+    currencies: [
+        'eur|€',
+        'usd|$',
+        'gbp|£',
+        'jpy|¥'
+    ],
+    // currencyLabel: '',  // Žiadny label
+    onlyCurrency: true,
+    currencyChangeUrl: '/api/currency/{CODE}',
     allowCurrencyChange: true
 });

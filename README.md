@@ -1,8 +1,40 @@
-# 🌍 Language & Currency Switcher v1.1.5 🌍 Language & Currency Switcher v1.1.4
+# 🌍 Language & Currency Switcher v1.2.0
 
 Pokročilý jazykový a menový prepínač pre webové stránky s plnou podporou accessibility, klávesovej navigácie a responsívneho dizajnu.
 
-## ✨ Nové funkcie v1.1.5
+## 📁 Štruktúra projektu
+
+```
+language-currency-switcher/
+├── .gitignore                   # Git ignore súbory (node_modules, dist, logs)
+├── .npmignore                   # NPM ignore súbory pre čistú publikáciu
+├── LICENSE                      # MIT licencia
+├── package.json                 # NPM manifest (verzia, závislosti, scripts)
+├── README.md                    # 📖 Hlavná dokumentácia a Getting Started
+├── docs/                        # 📚 Kompletná dokumentácia projektu
+│   ├── API.md                   # 🔧 Anglická API dokumentácia pre vývojárov
+│   ├── CHANGELOG.md             # 📝 História všetkých verzií a zmien
+│   ├── OPTIONS.md               # ⚙️ Kompletný prehľad všetkých konfigurácií
+│   └── PROJECT-STATUS.md        # 🤖 AI kontinuita a stav vývoja projektu
+├── examples/                    # 💡 Praktické príklady použitia
+│   └── initialization-examples.js  # Kompletné príklady inicializácie pluginu
+└── src/                         # 🛠️ Zdrojové súbory pluginu
+    ├── language-currency-switcher.js   # Hlavný JavaScript kód
+    ├── language-currency-switcher.scss # SCSS zdrojové štýly
+    ├── language-currency-switcher.css  # Kompilované CSS štýly
+    └── flags/                   # 🏁 SVG vlajky krajín (12 podporovaných)
+        ├── sk.svg, en.svg, de.svg, fr.svg, es.svg, it.svg
+        └── hu.svg, cz.svg, pl.svg, nl.svg, ru.svg, pt.svg
+```
+
+## ✨ Nové funkcie v1.2.0
+
+- 💰 **onlyCurrency režim** - Kompaktný prepínač iba pre meny bez dropdown menu
+- 🎨 **Konzistentný styling** - Zjednotený dizajn medzi onlyFlags a onlyCurrency
+- 🐛 **Bug fixes** - Opravený displayText undefined error v debug logovaní
+- 📚 **Rozšírená dokumentácia** - Aktualizované OPTIONS.md s novými možnosťami
+
+## Funkcie z v1.1.5
 
 - 🧹 **Cleanup release** - Odstránený duplikovaný AI-KONTINUITA.md súbor
 - 🎯 **Konzistentná štruktúra** - Iba PROJECT-STATUS.md pre AI kontinuitu
@@ -15,13 +47,6 @@ Pokročilý jazykový a menový prepínač pre webové stránky s plnou podporou
 - 🌍 **12 zahrnutých vlajok** - SK, EN, DE, FR, ES, IT, HU, CZ, PL, NL, RU, PT
 - 🔗 **Odporúčania zdrojov** - Návod na stiahnutie ďalších vlajok z Flag Icons a Country Flags API
 - 📦 **Zero dependencies** - Odstránená závislosť na flag-icons balíčku
-
-## Funkcie z v1.1.3
-
-- 📦 **NPM balíček** - Profesionálne publikovaný na npmjs.com
-- 📁 **Reorganizovaná štruktúra** - src/examples/docs adresáre pre NPM distribúciu
-- 📚 **Rozšírená dokumentácia** - API.md a CHANGELOG.md pre vývojárov
-- 🔗 **currencyChangeUrl funkcia** - Duálny režim pre meny (URL/callback)
 
 ## Funkcie z v1.1.2
 
@@ -123,6 +148,21 @@ LCSwitcher.init({
         'fr|Français'
     ],
     allowCurrencyChange: false
+});
+```
+
+#### OnlyCurrency režim (NOVINKA v1.2.0)
+```javascript
+LCSwitcher.init({
+    onlyCurrency: true,
+    currencies: [
+        'EUR|€|EUR',
+        'USD|$|USD',
+        'GBP|£|GBP',
+        'CZK|Kč|CZK'
+    ],
+    allowLanguageChange: false,
+    currencyChangeUrl: '/change-currency/{CODE}'
 });
 ```
 
@@ -428,7 +468,7 @@ Plugin bol testovaný na:
 - ♿ Plná accessibility podpora
 - 📱 Responsívny dizajn
 
-## 📄 Licencia
+## �📄 Licencia
 
 MIT License - pozrite [LICENSE](LICENSE) súbor pre detaily.
 
@@ -444,4 +484,4 @@ Príspevky sú vítané! Pre väčšie zmeny najprv otvorte issue pre diskusiu.
 
 ---
 
-**LCSwitcher v1.1.5** - Modernný, prístupný a výkonný jazykový prepínač pre web. 🚀
+**LCSwitcher v1.2.0** - Modernný, prístupný a výkonný jazykový prepínač pre web. 🚀
